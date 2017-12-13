@@ -1,0 +1,13 @@
+<h3>Tema</h3>
+<h1><%= @question.title%><h1>
+<h3>Descripcion</h3>
+<p><%= @question.question %></p>
+<% if current_user.id ==  @question.user_id %>
+	<%= link_to "Editar", edit_question_path(@question)%>
+	<%= link_to "Eliminar", question_path(@question) , method: :delete%>
+<% end %>
+<ul>
+<% @question.answer.each do |answer| %>
+	<li><%=answer.body %></li>
+<% end%>
+</ul>

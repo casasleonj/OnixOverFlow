@@ -1,5 +1,11 @@
-<%= form_for @question do |f| %>
-	<%= f.text_field :title%>
-	<%= f.text_area :question, size: "60x12"%>
+<%= form_for @question  do |f| %>
+<div class="form-group">
+	<%= f.label "Pregunta:" %>
+    <%= f.text_field :title, class: "form-control"%>		
+</div>
+<div class="form-group">
+	<%= f.label "Descripcion:" %>
+	<%= f.text_area :question, rows: "3",class: "form-control"%>
+</div>
 	<%= f.submit %>
 <% end %>

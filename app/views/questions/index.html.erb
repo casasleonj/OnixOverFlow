@@ -1,2 +1,7 @@
 <h1>Hola OnixOverflow</h1>
-<%= link_to "crea una Nueva Pregunta", new_questions_path%>
+<%= link_to "crea una Nueva Pregunta", new_question_path %>
+<ul>
+<% @questions.each do |question|%>
+	<li> <%=  link_to question.title, question %></li>
+<%end %>
+</ul>
