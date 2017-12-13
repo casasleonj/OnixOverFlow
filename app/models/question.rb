@@ -1,6 +1,6 @@
 class Question < ApplicationRecord
   belongs_to :user
-  has_many :answer
-  has_many :comment, :as => :commentable
-  has_many :vote, :as => :votable
+  has_many :answers
+  has_many :comments, :as => :commentable
+  has_many :votes, :as => :votable
 end

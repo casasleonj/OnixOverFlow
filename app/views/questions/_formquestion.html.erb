@@ -9,3 +9,11 @@
 </div>
 	<%= f.submit %>
 <% end %>
+
+<%= form_for [@question, @question.answers.new]  do |f| %>
+<div class="form-group">
+	<%= f.label "Respuesta:" %>
+    <%= f.text_field :body, class: "form-control"%>		
+</div>
+	<%= f.submit %>
+<% end %>
