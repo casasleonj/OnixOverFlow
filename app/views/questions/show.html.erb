@@ -8,6 +8,9 @@
 		<%= link_to "Eliminar", questions_path(@question) , method: :delete%>
 	<% end %>
 <% end %>
+
+<div>
+<h3>Respuestas</h3>
 <ul>
 <% @question.answers.each do |answer| %>
 
@@ -27,3 +30,5 @@
 		<%= render partial: "answers/formanswer", locals: { answer: @question.answers.new} %>
 	<% end %>
 <% end %>
+
+</div>

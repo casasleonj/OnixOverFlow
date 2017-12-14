@@ -1,0 +1,7 @@
+<%= form_for [commentable, comment]  do |f| %>
+<div class="form-group">
+	<%= f.label "Respuesta:" %>
+    <%= f.text_field :body, class: "form-control"%>		
+</div>
+	<%= f.submit %>
+<% end %>
