@@ -2,14 +2,28 @@
 <h1><%= @question.title%><h1>
 <h3>Descripcion</h3>
 <p><%= @question.question %></p>
-<% if current_user.id ==  @question.user_id %>
-	<%= link_to "Editar", edit_question_path(@question)%>
-	<%= link_to "Eliminar", question_path(@question) , method: :delete%>
+<% if user_signed_in? %>
+	<% if  current_user.id ==  @question.user_id %>
+		<%= link_to "Editar", edit_question_path(@question)%>
+		<%= link_to "Eliminar", questions_path(@question) , method: :delete%>
+	<% end %>
 <% end %>
 <ul>
-<% @question.answer.each do |answer| %>
-	<li><%=answer.body %></li>
-<% end%>
-</ul>
+<% @question.answers.each do |answer| %>
 
-<%= render "answers/formanswer" %>
+	<% if user_signed_in? && answer.user_id == current_user.id %>
+		<li> <%=answer.body %>
+			 <%= link_to "Editar", [answer.question ,answer]%> 	
+			 <%= link_to "Eliminar", [answer.question ,answer], method: :delete%> 
+		</li>
+	<% else %>
+		<li><%=answer.body %></li>
+	<% end %>
+ 	
+<% end%>
+</ul> 
+<% if user_signed_in? %>
+	<% unless @question.answers.find_by(user_id:current_user.id) %>
+		<%= render partial: "answers/formanswer", locals: { answer: @question.answers.new} %>
+	<% end %>
+<% end %>
