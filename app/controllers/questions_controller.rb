@@ -17,6 +17,7 @@ class QuestionsController < ApplicationController
 	def create		
 		question = Question.new(question_params)
 		if question.save
+			UserMailer.welcome_email(current_user).deliver
 			redirect_to question
 		else
 			@errors= question.errors.full_messages
