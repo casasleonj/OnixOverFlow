@@ -1,6 +1,9 @@
 <%= form_for [commentable, comment]  do |f| %>
+
 <div class="form-group">
-	<%= f.label "Respuesta:" %>
+	<%= f.hidden_field :commentable_type, :value => commentable.class %>
+	<%= f.hidden_field :commentable_id, :value => commentable.id %>
+	<%= f.label "Comentario:" %>
     <%= f.text_field :body, class: "form-control"%>		
 </div>
 	<%= f.submit %>

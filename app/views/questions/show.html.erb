@@ -1,13 +1,35 @@
 <h3>Tema</h3>
 <h1><%= @question.title%><h1>
 <h3>Descripcion</h3>
-<p><%= @question.question %></p>
+<p><%= markdown(@question.question) %></p>
 <% if user_signed_in? %>
 	<% if  current_user.id ==  @question.user_id %>
 		<%= link_to "Editar", edit_question_path(@question)%>
 		<%= link_to "Eliminar", questions_path(@question) , method: :delete%>
 	<% end %>
 <% end %>
+<div>
+<h3>Comentarios</h3>
+<ul>
+<% @question.comments.each do |comment| %>
+
+	<% if user_signed_in? && comment.user_id == current_user.id %>
+		<li> <%=comment.body %>
+			 <%= link_to "Editar", [comment.commentable ,comment]%> 	
+			 <%= link_to "Eliminar", [comment.commentable ,comment], method: :delete%> 
+		</li>
+	<% else %>
+		<li><%=comment.body %></li>
+	<% end %>
+ 	
+<% end%>
+</ul> 
+<% if user_signed_in? %>
+	<% unless @question.comments.find_by(user_id:current_user.id) %>
+		<%= render partial: "comments/formcomment", locals: { commentable: @question,comment: @question.comments.new} %>
+	<% end %>
+<% end %>
+</div>
 
 <div>
 <h3>Respuestas</h3>
@@ -15,14 +37,35 @@
 <% @question.answers.each do |answer| %>
 
 	<% if user_signed_in? && answer.user_id == current_user.id %>
-		<li> <%=answer.body %>
+		<li> <%=markdown(answer.body) %>
 			 <%= link_to "Editar", [answer.question ,answer]%> 	
 			 <%= link_to "Eliminar", [answer.question ,answer], method: :delete%> 
 		</li>
 	<% else %>
 		<li><%=answer.body %></li>
 	<% end %>
+		<div>
+			<h4>Comentarios</h4>
+			<ul>
+			<% answer.comments.each do |comment| %>
+
+				<% if user_signed_in? && comment.user_id == current_user.id %>
+					<li> <%=markdown(comment.body) %>
+			 			<%= link_to "Editar", [comment.commentable ,comment]%> 	
+					 	<%= link_to "Eliminar", [comment.commentable ,comment], method: :delete%> 
+					</li>
+				<% else %>
+					<li><%=comment.body %></li>
+				<% end %>
  	
+			<% end%>
+			</ul> 
+			<% if user_signed_in? %>
+				<% unless answer.comments.find_by(user_id:current_user.id) %>
+					<%= render partial: "comments/formcomment", locals: { commentable: answer,comment: answer.comments.new} %>
+				<% end %>
+			<% end %>
+		</div> 	
 <% end%>
 </ul> 
 <% if user_signed_in? %>
@@ -30,5 +73,4 @@
 		<%= render partial: "answers/formanswer", locals: { answer: @question.answers.new} %>
 	<% end %>
 <% end %>
-
 </div>
