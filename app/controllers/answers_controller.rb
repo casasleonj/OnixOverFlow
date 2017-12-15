@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-	before_action :authenticate_user!, only:[:new,:edit]
+	before_action :authenticate_user!, only:[:new,:edit,:destroy]
 
 	def create
 		answer= Answer.new(answer_params)

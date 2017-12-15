@@ -1,9 +1,7 @@
 class CommentsController < ApplicationController
 	before_action :authenticate_user!, only:[:new,:edit]
 
-	def create
-		#redirect to#
-		#save#
+	def create	
 		
 		params = comment_params
 		commentable = params[:commentable_type].constantize.find(params[:commentable_id])
@@ -23,6 +21,12 @@ class CommentsController < ApplicationController
 			end 
 	    end
 		#pendiente logica para comments desde answer
+	end
+
+	def destroy		
+	#	answer= Answer.find(params[:id])
+	#	answer.destroy
+	#	redirect_to question_path(params[:question_id])
 	end
 		
 
