@@ -5,7 +5,7 @@
 <% if user_signed_in? %>
 	<% if  current_user.id ==  @question.user_id %>
 		<%= link_to "Editar", edit_question_path(@question)%>
-		<%= link_to "Eliminar", questions_path(@question) , method: :delete%>
+		<%= link_to "Eliminar", @question , method: :delete%>
 	<% end %>
 <% end %>
 <div>

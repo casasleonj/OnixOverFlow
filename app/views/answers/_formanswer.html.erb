@@ -1,7 +1,7 @@
 <%= form_for [@question, answer]  do |f| %>
 <div class="form-group">
 	<%= f.label "Respuesta:" %>
-    <%= f.text_field :body, class: "form-control"%>		
+    <%= f.text_area :body, class: "form-control"%>		
 </div>
 	<%= f.submit %>
 <% end %>

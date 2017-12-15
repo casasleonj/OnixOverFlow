@@ -4,7 +4,7 @@
 	<%= f.hidden_field :commentable_type, :value => commentable.class %>
 	<%= f.hidden_field :commentable_id, :value => commentable.id %>
 	<%= f.label "Comentario:" %>
-    <%= f.text_field :body, class: "form-control"%>		
+    <%= f.text_area :body, class: "form-control"%>		
 </div>
 	<%= f.submit %>
 <% end %>
